@@ -20,7 +20,6 @@ A powerful Chrome extension that helps you stay focused by blocking distracting 
   - Quick access through popup menu
   - Detailed options page for fine-tuning
   - Clean blocked page interface
-  - Dark mode support
 - 🔒 **Security & Performance**
   - Built on Chrome's Manifest V3
   - Uses declarativeNetRequest for efficient blocking
