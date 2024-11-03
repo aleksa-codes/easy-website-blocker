@@ -61,7 +61,7 @@ A powerful Chrome extension that helps you stay focused by blocking distracting 
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/easy-website-blocker.git
+git clone https://github.com/aleksa-codes/easy-website-blocker.git
 cd easy-website-blocker
 ```
 
