@@ -1,24 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Plus } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { normalizeDomain } from '@/utils/rules';
 
 interface Props {
   onAdd: (domain: string) => void;
+  initialDomain?: string;
 }
 
-export const AddSiteForm: React.FC<Props> = ({ onAdd }) => {
+export const AddSiteForm: React.FC<Props> = ({ onAdd, initialDomain = '' }) => {
   const [domain, setDomain] = useState('');
   const [error, setError] = useState<string>('');
 
+  useEffect(() => {
+    if (initialDomain) {
+      setDomain(initialDomain);
+    }
+  }, [initialDomain]);
+
   const standardizeDomain = (input: string): string => {
-    // Remove protocol, www, and any paths/query params
+    // Remove protocol and any paths/query params
     const cleaned = input
       .toLowerCase()
-      .replace(/^(https?:\/\/)?(www\.)?/, '')
+      .replace(/^(https?:\/\/)?/, '')
       .split(/[/?#]/)[0] // Remove everything after domain
       .replace(/\/+$/, ''); // Remove trailing slashes
-    return cleaned;
+
+    return normalizeDomain(cleaned);
   };
 
   const isValidDomain = (domain: string): boolean => {

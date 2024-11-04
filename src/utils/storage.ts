@@ -46,3 +46,22 @@ export const removeException = async (domain: string, exception: string): Promis
     await saveBlocklist(blocklist);
   }
 };
+
+interface BlockerSettings {
+  showSitesInPopup: boolean;
+  isBlockingEnabled: boolean;
+  showBlockingToggleInPopup: boolean;
+}
+
+export const getSettings = async (): Promise<BlockerSettings> => {
+  const settings = await chrome.storage.sync.get([
+    'showSitesInPopup',
+    'isBlockingEnabled',
+    'showBlockingToggleInPopup',
+  ]);
+  return {
+    showSitesInPopup: settings.showSitesInPopup ?? false,
+    isBlockingEnabled: settings.isBlockingEnabled ?? true,
+    showBlockingToggleInPopup: settings.showBlockingToggleInPopup ?? false,
+  };
+};
