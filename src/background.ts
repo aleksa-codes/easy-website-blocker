@@ -1,9 +1,15 @@
 import { getBlocklist } from '@/utils/storage';
 import { generateRules, updateBlockingRules, normalizeDomain } from '@/utils/rules';
+import { getSettings } from '@/utils/storage';
 
 // Helper function to check if URL should be blocked
 async function shouldBlockUrl(url: string): Promise<boolean> {
   try {
+    const settings = await getSettings();
+    if (!settings.isBlockingEnabled) {
+      return false;
+    }
+
     const blocklist = await getBlocklist();
     const urlObj = new URL(url);
     const normalizedHostname = normalizeDomain(urlObj.hostname);
@@ -37,6 +43,15 @@ chrome.storage.onChanged.addListener(async (changes) => {
   if (changes.blocklist) {
     try {
       const rules = generateRules(changes.blocklist.newValue);
+      await updateBlockingRules(rules);
+    } catch (error) {
+      console.error('Error updating rules:', error);
+    }
+  }
+  if (changes.isBlockingEnabled) {
+    try {
+      const blocklist = await getBlocklist();
+      const rules = changes.isBlockingEnabled.newValue ? generateRules(blocklist) : [];
       await updateBlockingRules(rules);
     } catch (error) {
       console.error('Error updating rules:', error);
