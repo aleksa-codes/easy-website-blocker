@@ -1,4 +1,4 @@
-# Easy Website Blocker
+# Easy Website Blocker 🚫
 
 A powerful Chrome extension that helps you stay focused by blocking distracting websites while allowing specific pages through customizable exceptions. Perfect for maintaining productivity while keeping essential pages accessible.
 
