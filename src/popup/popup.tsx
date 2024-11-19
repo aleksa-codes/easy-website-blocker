@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { cn } from '@/lib/utils';
 import { BlockedSite } from '@/types';
 import { AddSiteForm } from '@/components/add-site-form';
 import { BlockedSiteList } from '@/components/blocked-site-list';
@@ -75,13 +76,16 @@ export const Popup: React.FC = () => {
         {showBlockingToggle && (
           <>
             <Card
-              className={`border-primary/10 bg-gradient-to-b ${
-                isBlockingEnabled ? 'from-primary/5 to-transparent' : 'from-destructive/5 to-transparent'
-              }`}
+              className={cn(
+                'border-primary/10 bg-gradient-to-b',
+                isBlockingEnabled ? 'from-primary/5 to-transparent' : 'from-destructive/5 to-transparent',
+              )}
             >
               <CardContent className='flex items-center justify-between p-3'>
                 <div className='flex items-center gap-2'>
-                  <ShieldCheck className={`h-5 w-5 ${isBlockingEnabled ? 'text-primary' : 'text-muted-foreground'}`} />
+                  <ShieldCheck
+                    className={cn('h-5 w-5', isBlockingEnabled ? 'text-primary' : 'text-muted-foreground')}
+                  />
                   <div className='space-y-0.5'>
                     <span className='text-sm font-medium'>Website Blocking</span>
                     <p className='text-xs text-muted-foreground'>{isBlockingEnabled ? 'Active' : 'Disabled'}</p>
@@ -101,8 +105,8 @@ export const Popup: React.FC = () => {
           <>
             <Separator className='my-2' />
             <div className='flex flex-col items-center justify-center gap-3 rounded-lg border border-border/50 bg-gradient-to-b from-muted/50 to-muted py-6 text-center shadow-sm'>
-              <div className={`rounded-full ${isBlockingEnabled ? 'bg-primary/10' : 'bg-destructive/10'} p-3`}>
-                <ShieldCheck className={`h-6 w-6 ${isBlockingEnabled ? 'text-primary' : 'text-muted-foreground'}`} />
+              <div className={cn('rounded-full', isBlockingEnabled ? 'bg-primary/10' : 'bg-destructive/10')}>
+                <ShieldCheck className={cn('h-6 w-6', isBlockingEnabled ? 'text-primary' : 'text-muted-foreground')} />
               </div>
               <div className='space-y-1'>
                 <p className='text-sm font-semibold text-foreground'>

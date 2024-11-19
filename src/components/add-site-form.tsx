@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { cn } from '@/lib/utils';
 import { Plus } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -70,7 +71,7 @@ export const AddSiteForm: React.FC<Props> = ({ onAdd, initialDomain = '' }) => {
             setError('');
           }}
           placeholder='Website (e.g. facebook.com)'
-          className={`flex-1 ${error ? 'border-red-500' : ''}`}
+          className={cn('flex-1', error && 'border-red-500')}
         />
         <Button type='submit' size='icon' variant='default'>
           <Plus className='h-4 w-4' />

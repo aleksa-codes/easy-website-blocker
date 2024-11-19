@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { cn } from '@/lib/utils';
 import {
   ShieldBan,
   ShieldCheck,
@@ -121,16 +122,17 @@ export const Options: React.FC = () => {
             <CardContent>
               <div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
                 <Card
-                  className={`border-primary/10 bg-gradient-to-br shadow-sm transition-all hover:shadow-md ${
+                  className={cn(
+                    'border-primary/10 shadow-sm transition-all hover:shadow-md',
                     isBlockingEnabled
                       ? 'from-primary/10 via-primary/5 to-transparent'
-                      : 'from-destructive/10 via-destructive/5 to-transparent'
-                  }`}
+                      : 'from-destructive/10 via-destructive/5 to-transparent',
+                  )}
                 >
                   <CardContent className='p-4'>
                     <div className='mb-3 flex items-center gap-2'>
                       <ShieldCheck
-                        className={`h-5 w-5 ${isBlockingEnabled ? 'text-primary' : 'text-muted-foreground'}`}
+                        className={cn('h-5 w-5', isBlockingEnabled ? 'text-primary' : 'text-muted-foreground')}
                       />
                       <span className='font-medium'>Website Blocking</span>
                     </div>
@@ -210,11 +212,12 @@ export const Options: React.FC = () => {
                     sites.map((site) => (
                       <Card
                         key={site.domain}
-                        className={`cursor-pointer transition-colors duration-200 ${
+                        className={cn(
+                          'cursor-pointer transition-colors duration-200',
                           selectedSite === site.domain
                             ? 'border-primary bg-primary/5'
-                            : 'hover:border-primary/50 hover:bg-muted/50'
-                        }`}
+                            : 'hover:border-primary/50 hover:bg-muted/50',
+                        )}
                         onClick={() => setSelectedSite(site.domain)}
                       >
                         <CardContent className='flex items-center justify-between p-3'>
