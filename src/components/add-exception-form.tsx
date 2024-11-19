@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { cn } from '@/lib/utils';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 
@@ -70,7 +71,7 @@ export const AddExceptionForm: React.FC<Props> = ({ onAdd }) => {
               setError('');
             }}
             placeholder='Page to allow (e.g. profile or news/latest)'
-            className={`pl-6 ${error ? 'border-red-500' : ''}`}
+            className={cn('pl-6', error && 'border-red-500')}
           />
         </div>
         <Button type='submit' variant='default'>
