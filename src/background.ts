@@ -42,8 +42,11 @@ chrome.runtime.onInstalled.addListener(async () => {
 chrome.storage.onChanged.addListener(async (changes) => {
   if (changes.blocklist) {
     try {
-      const rules = generateRules(changes.blocklist.newValue);
-      await updateBlockingRules(rules);
+      const settings = await getSettings();
+      if (settings.isBlockingEnabled) {
+        const rules = generateRules(changes.blocklist.newValue);
+        await updateBlockingRules(rules);
+      }
     } catch (error) {
       console.error('Error updating rules:', error);
     }
