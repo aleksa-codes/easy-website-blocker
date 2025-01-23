@@ -123,7 +123,7 @@ export const Options: React.FC = () => {
               <div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
                 <Card
                   className={cn(
-                    'border-primary/10 shadow-sm transition-all hover:shadow-md',
+                    'border-primary/10 shadow-xs transition-all hover:shadow-md',
                     isBlockingEnabled
                       ? 'from-primary/10 via-primary/5 to-transparent'
                       : 'from-destructive/10 via-destructive/5 to-transparent',
@@ -151,7 +151,7 @@ export const Options: React.FC = () => {
                   </CardContent>
                 </Card>
 
-                <Card className='border-primary/10 shadow-sm transition-all hover:shadow-md'>
+                <Card className='border-primary/10 shadow-xs transition-all hover:shadow-md'>
                   <CardContent className='p-4'>
                     <div className='mb-3 flex items-center gap-2'>
                       <PanelTop className='text-primary h-5 w-5' />
