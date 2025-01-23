@@ -15,11 +15,11 @@ export function Blocked() {
   }, []);
 
   return (
-    <div className='flex min-h-screen items-center justify-center bg-background p-4'>
+    <div className='bg-background flex min-h-screen items-center justify-center p-4'>
       <Card className='w-full max-w-md'>
         <CardHeader className='space-y-4'>
           <div className='flex justify-center'>
-            <ShieldBan className='h-12 w-12 text-primary' />
+            <ShieldBan className='text-primary h-12 w-12' />
           </div>
           <div>
             <CardTitle className='text-center text-2xl'>Website Blocked</CardTitle>
@@ -30,10 +30,10 @@ export function Blocked() {
         </CardHeader>
         <CardContent>
           <div className='space-y-6'>
-            <div className='rounded-lg bg-muted p-4'>
-              <p className='break-all text-center text-sm text-muted-foreground'>
+            <div className='bg-muted rounded-lg p-4'>
+              <p className='text-muted-foreground text-center text-sm break-all'>
                 Blocked website:
-                <span className='mt-1 block font-medium text-foreground'>{blockedUrl}</span>
+                <span className='text-foreground mt-1 block font-medium'>{blockedUrl}</span>
               </p>
             </div>
             <div className='flex justify-center'>
