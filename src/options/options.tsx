@@ -99,15 +99,15 @@ export const Options: React.FC = () => {
   const selectedSiteData = sites.find((site) => site.domain === selectedSite);
 
   return (
-    <div className='min-h-screen bg-background'>
+    <div className='bg-background min-h-screen'>
       <div className='mx-auto max-w-4xl space-y-4 px-4 py-8'>
         <div className='mb-8 flex flex-col items-center justify-center gap-3 text-center'>
-          <div className='rounded-full bg-primary/10 p-5'>
+          <div className='bg-primary/10 rounded-full p-5'>
             <ShieldBan className='text-primary' size={32} />
           </div>
           <div>
-            <h1 className='text-2xl font-bold text-foreground'>Easy Website Blocker</h1>
-            <p className='text-sm text-muted-foreground'>Block distracting websites and stay focused</p>
+            <h1 className='text-foreground text-2xl font-bold'>Easy Website Blocker</h1>
+            <p className='text-muted-foreground text-sm'>Block distracting websites and stay focused</p>
           </div>
         </div>
 
@@ -137,7 +137,7 @@ export const Options: React.FC = () => {
                       <span className='font-medium'>Website Blocking</span>
                     </div>
                     <div className='flex items-center justify-between gap-4'>
-                      <p className='text-sm text-muted-foreground'>
+                      <p className='text-muted-foreground text-sm'>
                         {isBlockingEnabled
                           ? 'Blocking is active and protecting you from distractions'
                           : 'Blocking is currently disabled'}
@@ -154,12 +154,12 @@ export const Options: React.FC = () => {
                 <Card className='border-primary/10 shadow-sm transition-all hover:shadow-md'>
                   <CardContent className='p-4'>
                     <div className='mb-3 flex items-center gap-2'>
-                      <PanelTop className='h-5 w-5 text-primary' />
+                      <PanelTop className='text-primary h-5 w-5' />
                       <span className='font-medium'>Popup Menu Settings</span>
                     </div>
                     <div className='space-y-3'>
                       <div className='flex items-center justify-between gap-4'>
-                        <label className='text-sm text-muted-foreground' htmlFor='show-sites'>
+                        <label className='text-muted-foreground text-sm' htmlFor='show-sites'>
                           Show blocked sites list in popup
                         </label>
                         <Switch
@@ -170,7 +170,7 @@ export const Options: React.FC = () => {
                         />
                       </div>
                       <div className='flex items-center justify-between gap-4'>
-                        <label className='text-sm text-muted-foreground' htmlFor='quick-toggle'>
+                        <label className='text-muted-foreground text-sm' htmlFor='quick-toggle'>
                           Show blocking toggle in popup
                         </label>
                         <Switch
@@ -200,13 +200,13 @@ export const Options: React.FC = () => {
             <CardContent>
               <AddSiteForm onAdd={handleAddSite} />
               <Separator className='my-4' />
-              <ScrollArea className='h-[400px] rounded-md border border-border/50 pr-4'>
+              <ScrollArea className='border-border/50 h-[400px] rounded-md border pr-4'>
                 <div className='space-y-2 p-3'>
                   {sites.length === 0 ? (
-                    <div className='flex flex-col items-center justify-center rounded-lg border border-dashed border-muted-foreground/25 bg-muted/50 py-8 text-center'>
-                      <AlertCircle className='mb-2 h-12 w-12 text-muted-foreground/50' />
-                      <p className='font-medium text-muted-foreground'>No websites blocked</p>
-                      <p className='text-sm text-muted-foreground/75'>Add a website above to start blocking</p>
+                    <div className='border-muted-foreground/25 bg-muted/50 flex flex-col items-center justify-center rounded-lg border border-dashed py-8 text-center'>
+                      <AlertCircle className='text-muted-foreground/50 mb-2 h-12 w-12' />
+                      <p className='text-muted-foreground font-medium'>No websites blocked</p>
+                      <p className='text-muted-foreground/75 text-sm'>Add a website above to start blocking</p>
                     </div>
                   ) : (
                     sites.map((site) => (
@@ -222,10 +222,10 @@ export const Options: React.FC = () => {
                       >
                         <CardContent className='flex items-center justify-between p-3'>
                           <div className='flex items-center gap-2'>
-                            <Globe className='h-4 w-4 text-muted-foreground' />
+                            <Globe className='text-muted-foreground h-4 w-4' />
                             <div>
-                              <p className='font-medium text-foreground'>{site.domain}</p>
-                              <div className='flex items-center gap-2 text-xs text-muted-foreground'>
+                              <p className='text-foreground font-medium'>{site.domain}</p>
+                              <div className='text-muted-foreground flex items-center gap-2 text-xs'>
                                 <span>{formatDistanceToNow(site.timestamp, { addSuffix: true })}</span>
                                 <span>•</span>
                                 <span>
@@ -241,7 +241,7 @@ export const Options: React.FC = () => {
                               e.stopPropagation();
                               handleRemoveSite(site.domain);
                             }}
-                            className='h-8 w-8 text-muted-foreground hover:bg-destructive/10 hover:text-destructive'
+                            className='text-muted-foreground hover:bg-destructive/10 hover:text-destructive h-8 w-8'
                           >
                             <Trash2 size={16} />
                           </Button>
@@ -277,13 +277,13 @@ export const Options: React.FC = () => {
                 <div className='space-y-4'>
                   <AddExceptionForm onAdd={handleAddException} />
                   <Separator className='my-4' />
-                  <ScrollArea className='h-[400px] rounded-md border border-border/50'>
+                  <ScrollArea className='border-border/50 h-[400px] rounded-md border'>
                     <div className='p-3'>
                       {selectedSiteData?.exceptions.length === 0 ? (
-                        <div className='flex flex-col items-center justify-center rounded-lg border border-dashed border-muted-foreground/25 bg-muted/50 py-8 text-center'>
-                          <FileText className='mb-2 h-12 w-12 text-muted-foreground opacity-50' />
-                          <p className='font-medium text-muted-foreground'>No exceptions added</p>
-                          <p className='text-sm text-muted-foreground/75'>Add paths you want to keep accessible</p>
+                        <div className='border-muted-foreground/25 bg-muted/50 flex flex-col items-center justify-center rounded-lg border border-dashed py-8 text-center'>
+                          <FileText className='text-muted-foreground mb-2 h-12 w-12 opacity-50' />
+                          <p className='text-muted-foreground font-medium'>No exceptions added</p>
+                          <p className='text-muted-foreground/75 text-sm'>Add paths you want to keep accessible</p>
                         </div>
                       ) : (
                         <ExceptionList
@@ -295,10 +295,10 @@ export const Options: React.FC = () => {
                   </ScrollArea>
                 </div>
               ) : (
-                <div className='flex flex-col items-center justify-center rounded-lg border border-dashed border-muted-foreground/25 bg-muted/50 py-12 text-center'>
-                  <MousePointerClick size={48} className='mb-4 text-muted-foreground/50' />
-                  <p className='font-medium text-muted-foreground'>No website selected</p>
-                  <p className='text-sm text-muted-foreground/75'>
+                <div className='border-muted-foreground/25 bg-muted/50 flex flex-col items-center justify-center rounded-lg border border-dashed py-12 text-center'>
+                  <MousePointerClick size={48} className='text-muted-foreground/50 mb-4' />
+                  <p className='text-muted-foreground font-medium'>No website selected</p>
+                  <p className='text-muted-foreground/75 text-sm'>
                     Select a website from the left to manage its exceptions
                   </p>
                 </div>
@@ -311,10 +311,10 @@ export const Options: React.FC = () => {
             href='https://github.com/aleksa-codes'
             target='_blank'
             rel='noopener noreferrer'
-            className='flex items-center gap-1 text-sm text-muted-foreground/60 transition-colors hover:text-muted-foreground'
+            className='text-muted-foreground/60 hover:text-muted-foreground flex items-center gap-1 text-sm transition-colors'
           >
             Created by
-            <span className='font-medium hover:text-primary'>aleksa.codes</span>
+            <span className='hover:text-primary font-medium'>aleksa.codes</span>
           </a>
         </footer>
       </div>

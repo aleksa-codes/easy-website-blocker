@@ -62,7 +62,7 @@ export const AddExceptionForm: React.FC<Props> = ({ onAdd }) => {
     <div className='space-y-2'>
       <form onSubmit={handleSubmit} className='flex gap-2'>
         <div className='relative flex-1'>
-          <span className='absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground'>/</span>
+          <span className='text-muted-foreground absolute top-1/2 left-3 -translate-y-1/2'>/</span>
           <Input
             type='text'
             value={path}

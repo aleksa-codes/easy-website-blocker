@@ -11,7 +11,7 @@ interface Props {
 
 export const ExceptionList: React.FC<Props> = ({ exceptions, onRemove }) => {
   if (exceptions.length === 0) {
-    return <p className='text-sm text-muted-foreground'>No exceptions added</p>;
+    return <p className='text-muted-foreground text-sm'>No exceptions added</p>;
   }
 
   return (
@@ -26,7 +26,7 @@ export const ExceptionList: React.FC<Props> = ({ exceptions, onRemove }) => {
               onClick={() => onRemove(exception)}
               variant='ghost'
               size='sm'
-              className='h-6 w-6 p-0 text-muted-foreground hover:text-destructive'
+              className='text-muted-foreground hover:text-destructive h-6 w-6 p-0'
               aria-label='Remove exception'
             >
               <X className='h-4 w-4' />

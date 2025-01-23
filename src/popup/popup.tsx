@@ -88,7 +88,7 @@ export const Popup: React.FC = () => {
                   />
                   <div className='space-y-0.5'>
                     <span className='text-sm font-medium'>Website Blocking</span>
-                    <p className='text-xs text-muted-foreground'>{isBlockingEnabled ? 'Active' : 'Disabled'}</p>
+                    <p className='text-muted-foreground text-xs'>{isBlockingEnabled ? 'Active' : 'Disabled'}</p>
                   </div>
                 </div>
                 <Switch checked={isBlockingEnabled} onCheckedChange={handleToggleBlocking} />
@@ -104,15 +104,15 @@ export const Popup: React.FC = () => {
         ) : (
           <>
             <Separator className='my-2' />
-            <div className='flex flex-col items-center justify-center gap-3 rounded-lg border border-border/50 bg-gradient-to-b from-muted/50 to-muted py-6 text-center shadow-sm'>
+            <div className='border-border/50 from-muted/50 to-muted flex flex-col items-center justify-center gap-3 rounded-lg border bg-gradient-to-b py-6 text-center shadow-sm'>
               <div className={cn('rounded-full', isBlockingEnabled ? 'bg-primary/10' : 'bg-destructive/10')}>
                 <ShieldCheck className={cn('h-6 w-6', isBlockingEnabled ? 'text-primary' : 'text-muted-foreground')} />
               </div>
               <div className='space-y-1'>
-                <p className='text-sm font-semibold text-foreground'>
+                <p className='text-foreground text-sm font-semibold'>
                   {sites.length} website{sites.length !== 1 ? 's' : ''} blocked
                 </p>
-                <p className='px-4 text-sm text-muted-foreground'>
+                <p className='text-muted-foreground px-4 text-sm'>
                   {isBlockingEnabled ? "You're protected from distracting websites" : 'Blocking is currently disabled'}
                 </p>
               </div>
@@ -133,10 +133,10 @@ export const Popup: React.FC = () => {
             href='https://github.com/aleksa-codes'
             target='_blank'
             rel='noopener noreferrer'
-            className='mt-2 flex items-center justify-center text-xs text-muted-foreground/60 transition-colors hover:text-muted-foreground'
+            className='text-muted-foreground/60 hover:text-muted-foreground mt-2 flex items-center justify-center text-xs transition-colors'
           >
             Created by
-            <span className='ml-1 font-medium hover:text-primary'>aleksa.codes</span>
+            <span className='hover:text-primary ml-1 font-medium'>aleksa.codes</span>
           </a>
         </div>
       </CardFooter>
