@@ -104,7 +104,7 @@ export const Popup: React.FC = () => {
         ) : (
           <>
             <Separator className='my-2' />
-            <div className='border-border/50 from-muted/50 to-muted flex flex-col items-center justify-center gap-3 rounded-lg border bg-gradient-to-b py-6 text-center shadow-sm'>
+            <div className='border-border/50 from-muted/50 to-muted flex flex-col items-center justify-center gap-3 rounded-lg border bg-gradient-to-b py-6 text-center shadow-xs'>
               <div className={cn('rounded-full', isBlockingEnabled ? 'bg-primary/10' : 'bg-destructive/10')}>
                 <ShieldCheck className={cn('h-6 w-6', isBlockingEnabled ? 'text-primary' : 'text-muted-foreground')} />
               </div>
