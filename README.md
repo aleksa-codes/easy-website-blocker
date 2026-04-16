@@ -4,6 +4,8 @@
 
 A Chrome extension that blocks distracting websites using MV3 Declarative Net Request rules, with per-domain path exceptions and a polished popup/options/blocked-page experience.
 
+![Easy Website Blocker Screenshot](public/screenshot.png)
+
 [![WXT](https://img.shields.io/badge/WXT-MV3-0ea5e9)](https://wxt.dev/)
 [![React](https://img.shields.io/badge/React-19-149eca?logo=react&logoColor=white)](https://react.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38bdf8?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
