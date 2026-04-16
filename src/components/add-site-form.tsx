@@ -60,7 +60,7 @@ export function AddSiteForm({ onAdd, initialDomain = "" }: AddSiteFormProps) {
             setDomain(event.target.value)
             setError("")
           }}
-          placeholder="Website (example: facebook.com)"
+          placeholder="e.g. facebook.com"
           className={cn("flex-1", error && "border-destructive")}
         />
         <Button

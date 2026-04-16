@@ -59,7 +59,7 @@ export function AddExceptionForm({ onAdd }: AddExceptionFormProps) {
               setPath(event.target.value)
               setError("")
             }}
-            placeholder="Page to allow (example: profile or docs/latest)"
+            placeholder="e.g. docs or app/settings"
             className={cn("pl-6", error && "border-destructive")}
           />
         </div>
