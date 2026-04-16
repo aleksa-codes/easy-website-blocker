@@ -1,84 +1,73 @@
-import React, { useState } from 'react';
-import { cn } from '@/lib/utils';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
+import { useState } from "react"
 
-interface Props {
-  onAdd: (exception: string) => void;
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { normalizeExceptionPath } from "@/lib/url"
+import { cn } from "@/lib/utils"
+
+interface AddExceptionFormProps {
+  onAdd: (exception: string) => Promise<boolean>
 }
 
-export const AddExceptionForm: React.FC<Props> = ({ onAdd }) => {
-  const [path, setPath] = useState('');
-  const [error, setError] = useState<string>('');
+export function AddExceptionForm({ onAdd }: AddExceptionFormProps) {
+  const [path, setPath] = useState("")
+  const [error, setError] = useState("")
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const standardizePath = (input: string): string => {
-    // Remove leading and trailing slashes, collapse multiple slashes
-    return input
-      .trim()
-      .replace(/^\/+|\/+$/g, '')
-      .replace(/\/+/g, '/');
-  };
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault()
+    setError("")
 
-  const isValidPath = (path: string): boolean => {
-    // Updated regex to allow:
-    // - @ symbols (for social media handles)
-    // - % for URL encoded characters
-    // - = and & for query parameters
-    // - # for hash fragments
-    // - ~ for user directories
-    // - + for spaces in URLs
-    // - : for parameters
-    // - , for lists
-    const pathRegex = /^[@a-zA-Z0-9-_.~+:,=%&/#]+$/;
-
-    // Additional checks for common patterns
-    if (path.includes('//')) return false; // No double slashes
-    if (path.endsWith('.')) return false; // No trailing dots
-
-    return pathRegex.test(path);
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setError('');
-
-    const standardizedPath = standardizePath(path.trim());
-
-    if (!standardizedPath) {
-      setError('Please enter a page address');
-      return;
+    const normalizedPath = normalizeExceptionPath(path)
+    if (!normalizedPath) {
+      setError("Please enter a page path.")
+      return
     }
 
-    if (!isValidPath(standardizedPath)) {
-      setError('This page address contains invalid characters. Please use only letters, numbers, and common symbols');
-      return;
+    if (!!!normalizedPath) {
+      setError(
+        "This page path contains invalid characters. Use letters, numbers, and common URL symbols."
+      )
+      return
     }
 
-    onAdd(standardizedPath);
-    setPath('');
-  };
+    setIsSubmitting(true)
+    try {
+      const added = await onAdd(normalizedPath)
+      if (!added) {
+        setError("This exception already exists.")
+        return
+      }
+
+      setPath("")
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
 
   return (
-    <div className='space-y-2'>
-      <form onSubmit={handleSubmit} className='flex gap-2'>
-        <div className='relative flex-1'>
-          <span className='text-muted-foreground absolute top-1/2 left-3 -translate-y-1/2'>/</span>
+    <div className="space-y-2">
+      <form onSubmit={handleSubmit} className="flex gap-2">
+        <div className="relative flex-1">
+          <span className="absolute top-1/2 left-3 -translate-y-1/2 text-muted-foreground">
+            /
+          </span>
           <Input
-            type='text'
+            type="text"
             value={path}
-            onChange={(e) => {
-              setPath(e.target.value);
-              setError('');
+            onChange={(event) => {
+              setPath(event.target.value)
+              setError("")
             }}
-            placeholder='Page to allow (e.g. profile or news/latest)'
-            className={cn('pl-6', error && 'border-red-500')}
+            placeholder="Page to allow (example: profile or docs/latest)"
+            className={cn("pl-6", error && "border-destructive")}
           />
         </div>
-        <Button type='submit' variant='default'>
+        <Button type="submit" variant="default" disabled={isSubmitting}>
           Allow
         </Button>
       </form>
-      {error && <p className='text-sm text-red-500'>{error}</p>}
+      {error && <p className="text-sm text-destructive">{error}</p>}
     </div>
-  );
-};
+  )
+}

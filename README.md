@@ -1,108 +1,84 @@
-# Easy Website Blocker 🚫
+# Easy Website Blocker (WXT)
 
-Easy Website Blocker is a Chrome extension designed to help you stay focused by blocking distracting websites, while allowing specific pages through customizable exceptions. Perfect for maintaining productivity without sacrificing access to essential resources.
+> **April 2026 Update:** Migrated from CRXJS and improved with a cleaner architecture and modern UI stack.
 
-![Easy Website Blocker Screenshot](./public/screenshot.png)
+A Chrome extension that blocks distracting websites using MV3 Declarative Net Request rules, with per-domain path exceptions and a polished popup/options/blocked-page experience.
 
-## ✨ Features
+[![WXT](https://img.shields.io/badge/WXT-MV3-0ea5e9)](https://wxt.dev/)
+[![React](https://img.shields.io/badge/React-19-149eca?logo=react&logoColor=white)](https://react.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38bdf8?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-6-3178c6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Bun](https://img.shields.io/badge/Bun-Package_Manager-f9f1e1)](https://bun.sh/)
 
-- **Smart Website Blocking**: Block entire domains with a single click
-- **Flexible Exceptions**: Allow specific pages or sections within blocked sites
-- **Instant Blocking**: No need to restart the browser for changes to take effect
-- **Intuitive User Experience**: Quick access via popup menu and a detailed options page
-- **Efficient & Secure**: Built on Chrome's Manifest V3 using declarativeNetRequest, with local storage for privacy
+## Features
 
-## 🛠️ Tech Stack
+- **Fast MV3 blocking:** Uses Chrome Declarative Net Request dynamic rules for reliable domain-level blocking.
+- **Per-site exceptions:** Allow specific paths (for example docs pages) while keeping the main domain blocked.
+- **Live settings sync:** Rule and toggle changes are persisted in Chrome storage and reflected immediately.
+- **SPA fallback protection:** Handles history-state navigation in single-page apps so blocked pages still redirect.
+- **Three dedicated surfaces:** Popup for quick control, Options for full management, and a custom Blocked page.
+- **Modern UI stack:** React 19 + Tailwind v4 + shadcn/ui primitives.
 
-- **Frontend Framework**: React + TypeScript
-- **Styling**: Tailwind CSS
-- **UI Components**: shadcn/ui, Radix UI
-- **Icons**: Lucide React
-- **Build Tool**: Vite
-- **Extension Framework**: Chrome Extensions API (Manifest V3)
-- **Development Tools**: TypeScript, ESLint, Prettier, CRXJS for Vite
+## Quick Start
 
-## 🚀 Getting Started
+```bash
+# Install dependencies
+bun install
 
-### Prerequisites
-
-- Node.js (v16 or higher)
-- npm or yarn
-- Chrome browser
-
-### Installation
-
-1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/aleksa-codes/easy-website-blocker.git
-   cd easy-website-blocker
-   ```
-
-2. Install dependencies:
-
-   ```bash
-   npm install
-   # or
-   yarn install
-   ```
-
-3. Build the extension:
-
-   ```bash
-   npm run build
-   # or
-   yarn build
-   ```
-
-4. Load the extension in Chrome:
-   - Open Chrome and navigate to `chrome://extensions/`
-   - Enable "Developer mode" in the top right
-   - Click "Load unpacked" and select the `dist` folder
-
-## 💡 Usage
-
-1. **Blocking a Website**: Click the extension icon, enter the domain (e.g., `facebook.com`), and click "Block."
-2. **Adding Exceptions**: Go to the options page, select the blocked website, and add path exceptions (e.g., `facebook.com/groups/productivity`).
-3. **Managing Blocked Sites**: Use the popup for quick blocking/unblocking, or visit the options page for detailed management.
-
-## 🛠️ Project Structure
-
-```
-easy-website-blocker/
-├── src/
-│   ├── components/          # Reusable UI components
-│   ├── popup/               # Extension popup interface
-│   ├── options/             # Options page
-│   ├── blocked/             # Blocked page interface
-│   ├── utils/               # Utility functions
-│   ├── types/               # TypeScript types
-│   └── background.ts        # Service worker
-├── public/                  # Static assets
-│   └── rules/               # Blocking rules
-└── manifest.json            # Extension manifest
+# Start extension dev mode
+bun run dev
 ```
 
-## 🤝 Contributing
+Then load the extension from `.output/chrome-mv3` in `chrome://extensions` (Developer Mode -> Load unpacked).
 
-Contributions are welcome! Here's how you can help:
+## Scripts
 
-1. Fork the repository
-2. Create your feature branch: `git checkout -b feature/AmazingFeature`
-3. Commit your changes: `git commit -m 'Add some AmazingFeature'`
-4. Push to the branch: `git push origin feature/AmazingFeature`
-5. Open a Pull Request
+| Command                 | Description                       |
+| ----------------------- | --------------------------------- |
+| `bun run dev`           | Run extension in dev mode         |
+| `bun run dev:firefox`   | Run dev mode for Firefox          |
+| `bun run build`         | Build production bundle           |
+| `bun run build:firefox` | Build production bundle (Firefox) |
+| `bun run zip`           | Create production zip             |
+| `bun run zip:firefox`   | Create production zip (Firefox)   |
+| `bun run typecheck`     | Run TypeScript checks             |
+| `bun run format`        | Format code with Prettier         |
 
-### Development Guidelines
+## Project Structure
 
-- Follow existing code styles and conventions
-- Add TypeScript types for new features
-- Test new features and update documentation as needed
+```txt
+src/
+├─ entrypoints/         # background + popup/options/blocked entry files
+├─ features/            # screen-level React features
+├─ components/          # reusable forms, lists, and UI wrappers
+├─ components/ui/       # shadcn-style UI primitives
+├─ lib/                 # storage, types, URL normalization/validation
+└─ assets/              # global Tailwind stylesheet
+```
 
-## 📝 License
+## How Blocking Works
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+1. Rules are stored in `chrome.storage.local`.
+2. Settings are stored in `chrome.storage.sync`.
+3. Background worker maps saved rules to DNR dynamic allow/redirect rules.
+4. Navigation to blocked URLs is redirected to the bundled blocked page.
+5. SPA history updates are checked as a fallback to keep blocking consistent.
 
----
+## Tech Stack
 
-<p align="center">Made with ❤️ by <a href="https://github.com/aleksa-codes">aleksa.codes</a></p>
+- [WXT](https://wxt.dev/) for MV3 extension build tooling
+- [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS v4](https://tailwindcss.com/) + [shadcn/ui](https://ui.shadcn.com/)
+- [Bun](https://bun.sh/) for package management and scripts
+
+## Load In Chrome
+
+1. Run `bun run build`.
+2. Open `chrome://extensions`.
+3. Enable Developer Mode.
+4. Click **Load unpacked**.
+5. Select `.output/chrome-mv3`.
+
+## License
+
+MIT License. See [LICENSE](LICENSE) for details.
