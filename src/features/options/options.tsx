@@ -113,10 +113,10 @@ export function Options() {
   const selectedSiteData = sites.find((site) => site.domain === selectedSite)
 
   return (
-    <div className="flex min-h-screen flex-col bg-background text-foreground">
+    <div className="flex h-screen w-full flex-col overflow-hidden bg-background text-foreground">
       {/* Premium Header */}
-      <header className="sticky top-0 z-30 border-b bg-background/85 backdrop-blur-md">
-        <div className="mx-auto flex h-16 max-w-350 items-center justify-between px-4 sm:px-6">
+      <header className="z-30 shrink-0 border-b bg-background/85 backdrop-blur-md">
+        <div className="flex h-16 w-full items-center justify-between px-4 sm:px-6">
           {/* Logo & Title */}
           <div className="flex flex-1 items-center justify-start gap-3">
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-sm">
@@ -187,9 +187,9 @@ export function Options() {
       </header>
 
       {/* Main Content Area */}
-      <main className="flex-1 bg-muted/20">
+      <main className="flex flex-1 flex-col overflow-hidden bg-muted/20">
         {activeTab === "blocklist" && (
-          <div className="mx-auto flex h-[calc(100vh-4rem)] max-w-350 flex-col overflow-hidden md:flex-row md:border-x">
+          <div className="flex flex-1 flex-col overflow-hidden md:flex-row">
             {/* Left Sidebar: Sites Master List */}
             <div className="flex flex-col border-b bg-muted/10 md:w-[320px] md:border-r md:border-b-0 lg:w-95">
               <div className="border-b bg-background p-4 sm:p-5">
@@ -357,70 +357,72 @@ export function Options() {
 
         {/* Preferences / Settings Tab */}
         {activeTab === "settings" && (
-          <div className="mx-auto max-w-2xl animate-in px-6 py-12 duration-300 fade-in slide-in-from-bottom-4">
-            <h2 className="mb-2 text-2xl font-bold tracking-tight text-foreground">
-              Preferences
-            </h2>
-            <p className="mb-8 text-muted-foreground">
-              Customize your extension interface and behavior.
-            </p>
+          <div className="w-full flex-1 overflow-y-auto">
+            <div className="mx-auto max-w-2xl animate-in px-6 py-12 duration-300 fade-in slide-in-from-bottom-4">
+              <h2 className="mb-2 text-2xl font-bold tracking-tight text-foreground">
+                Preferences
+              </h2>
+              <p className="mb-8 text-muted-foreground">
+                Customize your extension interface and behavior.
+              </p>
 
-            <div className="space-y-6">
-              <Card className="border-border/50 shadow-sm">
-                <CardHeader className="bg-muted/10 pb-4">
-                  <CardTitle className="text-base">
-                    Popup Menu Interface
-                  </CardTitle>
-                  <CardDescription>
-                    Configure what appears when you click the extension icon in
-                    your browser toolbar.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="divide-y p-0">
-                  <div className="flex justify-between p-6">
-                    <div className="mr-4 space-y-1">
-                      <label className="text-sm leading-none font-medium text-foreground">
-                        Show blocked websites list
-                      </label>
-                      <p className="text-sm text-muted-foreground">
-                        Display your list of blocked domains directly inside the
-                        popup menu.
-                      </p>
+              <div className="space-y-6">
+                <Card className="border-border/50 shadow-sm">
+                  <CardHeader className="bg-muted/10 pb-4">
+                    <CardTitle className="text-base">
+                      Popup Menu Interface
+                    </CardTitle>
+                    <CardDescription>
+                      Configure what appears when you click the extension icon
+                      in your browser toolbar.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="divide-y p-0">
+                    <div className="flex justify-between p-6">
+                      <div className="mr-4 space-y-1">
+                        <label className="text-sm leading-none font-medium text-foreground">
+                          Show blocked websites list
+                        </label>
+                        <p className="text-sm text-muted-foreground">
+                          Display your list of blocked domains directly inside
+                          the popup menu.
+                        </p>
+                      </div>
+                      <Switch
+                        checked={showSitesInPopup}
+                        onCheckedChange={handleToggleShowSites}
+                      />
                     </div>
-                    <Switch
-                      checked={showSitesInPopup}
-                      onCheckedChange={handleToggleShowSites}
-                    />
-                  </div>
 
-                  <div className="flex justify-between p-6">
-                    <div className="mr-4 space-y-1">
-                      <label className="text-sm leading-none font-medium text-foreground">
-                        Show quick blocking toggle
-                      </label>
-                      <p className="text-sm text-muted-foreground">
-                        Embed a master switch to instantly pause or resume
-                        blocking globally without opening these settings.
-                      </p>
+                    <div className="flex justify-between p-6">
+                      <div className="mr-4 space-y-1">
+                        <label className="text-sm leading-none font-medium text-foreground">
+                          Show quick blocking toggle
+                        </label>
+                        <p className="text-sm text-muted-foreground">
+                          Embed a master switch to instantly pause or resume
+                          blocking globally without opening these settings.
+                        </p>
+                      </div>
+                      <Switch
+                        checked={showBlockingToggleInPopup}
+                        onCheckedChange={handleToggleBlockingInPopup}
+                      />
                     </div>
-                    <Switch
-                      checked={showBlockingToggleInPopup}
-                      onCheckedChange={handleToggleBlockingInPopup}
-                    />
-                  </div>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
 
-              <div className="pt-12 text-center">
-                <a
-                  href="https://github.com/aleksa-codes"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground/70 transition-colors hover:text-primary"
-                >
-                  <Globe className="h-3 w-3" />
-                  Created by aleksa.codes
-                </a>
+                <div className="pt-12 text-center">
+                  <a
+                    href="https://github.com/aleksa-codes"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground/70 transition-colors hover:text-primary"
+                  >
+                    <Globe className="h-3 w-3" />
+                    Created by aleksa.codes
+                  </a>
+                </div>
               </div>
             </div>
           </div>
