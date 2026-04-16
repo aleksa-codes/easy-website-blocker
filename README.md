@@ -1,4 +1,4 @@
-# Easy Website Blocker (WXT)
+# 🚫 Easy Website Blocker (WXT)
 
 > **April 2026 Update:** Migrated from CRXJS and improved with a cleaner architecture and modern UI stack.
 
@@ -64,13 +64,6 @@ src/
 4. Navigation to blocked URLs is redirected to the bundled blocked page.
 5. SPA history updates are checked as a fallback to keep blocking consistent.
 
-## Tech Stack
-
-- [WXT](https://wxt.dev/) for MV3 extension build tooling
-- [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
-- [Tailwind CSS v4](https://tailwindcss.com/) + [shadcn/ui](https://ui.shadcn.com/)
-- [Bun](https://bun.sh/) for package management and scripts
-
 ## Load In Chrome
 
 1. Run `bun run build`.
@@ -78,6 +71,13 @@ src/
 3. Enable Developer Mode.
 4. Click **Load unpacked**.
 5. Select `.output/chrome-mv3`.
+
+## Tech Stack
+
+- [WXT](https://wxt.dev/) for MV3 extension build tooling
+- [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS v4](https://tailwindcss.com/) + [shadcn/ui](https://ui.shadcn.com/)
+- [Bun](https://bun.sh/) for package management and scripts
 
 ## License
 
